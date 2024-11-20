@@ -18,6 +18,12 @@ type Query {
     obtenerHospedajes: [Hospedaje]
     obtenerHospedajePorId(id: ID): Hospedaje
     obtenerHospedajePorNombre(nombre: String): [Hospedaje]
+
+    obtenerVoluntariados: [Voluntariado]
+    obtenerVoluntariadosporId(id: ID): Voluntariado
+    obtenerVoluntariadosPorNombre(nombre: String): [Voluntariado]
+
+    
 }
 
 enum TipoTransporte {
@@ -207,4 +213,23 @@ type Hospedaje implements Servicio {
     ubicacionLatitud: Float!
     ubicacionLongitud: Float!
     nombreUbicacion: String!
+}
+
+type Voluntariado implements Servicio {
+    idServicio: ID
+    nombre: String
+    descripcion: String
+    estado: EstadoServicio
+    foto: String
+    fotosDescripcion: [String]
+    calificaciones: [Calificacion]
+    objetivo: String
+    duracion: Int
+    actividades: [String]
+    requerimientos: [String]
+    ubicacionLatitud: Float
+    ubicacionLongitud: Float
+    nombreUbicacion: String
+    costo: Float
+    beneficios: [String]
 }

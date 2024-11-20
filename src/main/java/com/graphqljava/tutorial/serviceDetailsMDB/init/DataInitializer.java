@@ -7,6 +7,7 @@ import com.graphqljava.tutorial.serviceDetailsMDB.entity.EstadoServicio;
 import com.graphqljava.tutorial.serviceDetailsMDB.entity.Hospedaje;
 import com.graphqljava.tutorial.serviceDetailsMDB.entity.TipoTransporte;
 import com.graphqljava.tutorial.serviceDetailsMDB.entity.Transporte;
+import com.graphqljava.tutorial.serviceDetailsMDB.entity.Voluntariado;
 import com.graphqljava.tutorial.serviceDetailsMDB.entity.Actividad;
 import com.graphqljava.tutorial.serviceDetailsMDB.entity.Alimentacion;
 import com.graphqljava.tutorial.serviceDetailsMDB.entity.TipoActividad;
@@ -14,6 +15,7 @@ import com.graphqljava.tutorial.serviceDetailsMDB.entity.TipoCocina;
 import com.graphqljava.tutorial.serviceDetailsMDB.entity.TipoHospedaje;
 import com.graphqljava.tutorial.serviceDetailsMDB.entity.NivelDificultad;
 import com.graphqljava.tutorial.serviceDetailsMDB.repository.TransporteRepository;
+import com.graphqljava.tutorial.serviceDetailsMDB.repository.VoluntariadoRepository;
 import com.graphqljava.tutorial.serviceDetailsMDB.repository.ActividadRepository;
 import com.graphqljava.tutorial.serviceDetailsMDB.repository.AlimentacionRepository;
 import com.graphqljava.tutorial.serviceDetailsMDB.repository.HospedajeRepository;
@@ -28,13 +30,16 @@ public class DataInitializer implements CommandLineRunner {
         private final ActividadRepository actividadRepository;
         private final AlimentacionRepository alimentacionRepository;
         private final HospedajeRepository hospedajeRepository;
+        private final VoluntariadoRepository voluntariadoRepository;
 
         public DataInitializer(TransporteRepository transporteRepository, ActividadRepository actividadRepository,
-                        AlimentacionRepository alimentacionRepository, HospedajeRepository hospedajeRepository) {
+                        AlimentacionRepository alimentacionRepository, HospedajeRepository hospedajeRepository,
+                        VoluntariadoRepository voluntariadoRepository) {
                 this.transporteRepository = transporteRepository;
                 this.actividadRepository = actividadRepository;
                 this.alimentacionRepository = alimentacionRepository;
                 this.hospedajeRepository = hospedajeRepository;
+                this.voluntariadoRepository = voluntariadoRepository;
         }
 
         @Override
@@ -201,8 +206,55 @@ public class DataInitializer implements CommandLineRunner {
                                 -76.5312,
                                 "Zona Rural de Cali");
 
-                
                 hospedajeRepository.saveAll(Arrays.asList(hospedaje1, hospedaje2, hospedaje3));
+
+                Voluntariado voluntariado1 = new Voluntariado(
+                                "Voluntariado en salud comunitaria",
+                                "Brigada de salud para comunidades rurales",
+                                EstadoServicio.DISPONIBLE,
+                                "Mejorar la salud y el bienestar de comunidades rurales",
+                                15, // Duración en días
+                                Arrays.asList("Atención médica", "Revisión de salud", "Charlas educativas"),
+                                Arrays.asList("Mayor de 18 años", "Experiencia en salud",
+                                                "Compromiso de tiempo completo"),
+                                4.711, // Latitud
+                                -74.072, // Longitud
+                                "Cundinamarca, Colombia",
+                                0.0, // Costo: Voluntariado sin costo
+                                Arrays.asList("Alimentación", "Alojamiento", "Transporte"));
+
+                Voluntariado voluntariado2 = new Voluntariado(
+                                "Voluntariado ambiental",
+                                "Reforestación y educación ambiental en la selva",
+                                EstadoServicio.DISPONIBLE,
+                                "Proteger y preservar el medio ambiente en la región amazónica",
+                                30, // Duración en días
+                                Arrays.asList("Reforestación", "Educación ambiental", "Reciclaje"),
+                                Arrays.asList("Compromiso con la naturaleza", "Disponibilidad para trabajo físico",
+                                                "Trabajo en equipo"),
+                                -3.465, // Latitud
+                                -62.933, // Longitud
+                                "Amazonas, Colombia",
+                                0.0, // Costo: Voluntariado sin costo
+                                Arrays.asList("Alimentación", "Alojamiento", "Capacitación"));
+
+                Voluntariado voluntariado3 = new Voluntariado(
+                                "Voluntariado en educación",
+                                "Enseñanza en comunidades sin acceso a educación formal",
+                                EstadoServicio.DISPONIBLE,
+                                "Brindar acceso a la educación en zonas de difícil acceso",
+                                45, // Duración en días
+                                Arrays.asList("Clases de matemáticas", "Clases de ciencias", "Charlas motivacionales"),
+                                Arrays.asList("Habilidad para enseñar", "Paciencia", "Disponibilidad para viajar"),
+                                6.2518, // Latitud
+                                -75.5636, // Longitud
+                                "Antioquia, Colombia",
+                                0.0, // Costo: Voluntariado sin costo
+                                Arrays.asList("Alimentación", "Transporte", "Material educativo"));
+
+                // Guardar los voluntariados en la base de datos
+                voluntariadoRepository.saveAll(Arrays.asList(voluntariado1, voluntariado2, voluntariado3));
+
         }
 
 }
