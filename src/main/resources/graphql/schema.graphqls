@@ -10,6 +10,10 @@ type Query {
     obtenerActividades: [Actividad]
     obtenerActividadPorId(id: ID): Actividad
     obtenerActividadesPorNombre(nombre: String): [Actividad]
+
+    obtenerAlimentaciones: [Alimentacion]
+    obtenerAlimentacionPorId(id: ID): Alimentacion
+    obtenerAlimentacionPorNombre(nombre: String): [Alimentacion]
 }
 
 enum TipoTransporte {
@@ -59,6 +63,33 @@ enum TipoActividad {
     AGRICULTURA_ECOLOGICA
     VISITAS_COMUNIDADES_INDIGENAS
     TERAPIAS_NATURALEZA
+}
+
+enum TipoCocina {
+    REGIONAL
+    INTERNACIONAL
+    VEGETARIANA
+    VEGANA
+    MARISCOS
+    MEDITERRANEA
+    ASIATICA
+    FRANCESA
+    ITALIANA
+    MEXICANA
+    INDIA
+    JAPONESA
+    CHINA
+    TAILANDESA
+    LIBANESA
+    AFRICANA
+    PERUANA
+    ESPANOLA
+    GRIEGA
+    BRASILENA
+    AMERICANA
+    CARIBENA
+    MIDDLE_EASTERN
+    FUSION
 }
 
 type Product {
@@ -119,6 +150,23 @@ type Actividad implements Servicio {
     precio: Float
     requerimientos: [String]
     capacidadMaxima: Int
+    ubicacionLatitud: Float
+    ubicacionLongitud: Float
+    nombreUbicacion: String
+}
+
+type Alimentacion implements Servicio {
+    idServicio: ID
+    nombre: String
+    descripcion: String
+    estado: EstadoServicio
+    foto: String
+    fotosDescripcion: [String]
+    calificaciones: [Calificacion]
+    tipoCocina: TipoCocina
+    horaMinima: String
+    horaMaxima: String
+    precio: Float
     ubicacionLatitud: Float
     ubicacionLongitud: Float
     nombreUbicacion: String
