@@ -14,6 +14,10 @@ type Query {
     obtenerAlimentaciones: [Alimentacion]
     obtenerAlimentacionPorId(id: ID): Alimentacion
     obtenerAlimentacionPorNombre(nombre: String): [Alimentacion]
+
+    obtenerHospedajes: [Hospedaje]
+    obtenerHospedajePorId(id: ID): Hospedaje
+    obtenerHospedajePorNombre(nombre: String): [Hospedaje]
 }
 
 enum TipoTransporte {
@@ -91,6 +95,20 @@ enum TipoCocina {
     MIDDLE_EASTERN
     FUSION
 }
+
+enum TipoHospedaje {
+    HOTEL
+    CABANA
+    CAMPING
+    HOSTAL
+    APARTAMENTO
+    RESORT
+    CASA_RURAL
+    GLAMPING
+    ALBERGUE
+    CASA_DE_HUESPEDES
+}
+
 
 type Product {
     id: ID
@@ -170,4 +188,23 @@ type Alimentacion implements Servicio {
     ubicacionLatitud: Float
     ubicacionLongitud: Float
     nombreUbicacion: String
+}
+
+type Hospedaje implements Servicio {
+    idServicio: ID
+    nombre: String
+    descripcion: String
+    estado: EstadoServicio
+    foto: String
+    fotosDescripcion: [String]
+    calificaciones: [Calificacion]
+    tipoHospedaje: TipoHospedaje!
+    capacidadMaxima: Int!
+    dias: Int!
+    noches: Int!
+    horaCheckOut: String!
+    serviciosIncluidos: [String!]!
+    ubicacionLatitud: Float!
+    ubicacionLongitud: Float!
+    nombreUbicacion: String!
 }
