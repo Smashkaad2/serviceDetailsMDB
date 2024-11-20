@@ -2,16 +2,15 @@ type Query {
     getAllProducts: [Product]
     getProductById(id: ID): Product
     getProductByName(name: String): [Product]
+
     obtenerTransportes: [Transporte]
     obtenerTransportePorId(id: ID): Transporte
     obtenerTransportesPorNombre(nombre: String): [Transporte]
+
+    obtenerActividades: [Actividad]
+    obtenerActividadPorId(id: ID): Actividad
+    obtenerActividadesPorNombre(nombre: String): [Actividad]
 }
-
-# type Mutation {
-#     createProduct(name: String!, description: String, price: Float): Product
-#      crearTransporte(transporte: Transporte): Transporte
-# }
-
 
 enum TipoTransporte {
     AEREO
@@ -25,6 +24,42 @@ enum EstadoServicio {
     SUSPENDIDO
 }
 
+enum NivelDificultad {
+    FACIL
+    FACIL_MODERADO
+    MODERADO
+    MODERADO_DIFICIL
+    DIFICIL
+    DIFICIL_EXTREMO
+    EXTREMO
+}
+
+enum TipoActividad {
+    TREKKING
+    OBSERVACION_FAUNA
+    SENDERISMO
+    KAYAK
+    CANOA
+    SNORKEL
+    BUCEO
+    OBSERVACION_AVES
+    PASEOS_CABALLO
+    CICLISMO
+    VISITAS_GUIADAS
+    VOLUNTARIADO_REFORESTACION
+    LIMPIEZA_PLAYAS
+    CONSERVACION_FAUNA
+    CAMPAMENTOS_EDUCATIVOS
+    TALLERES_MEDIOAMBIENTALES
+    FOTOGRAFIA_NATURALEZA
+    CARRERAS_ORIENTACION
+    ESCALADA
+    VIA_FERRATA
+    PESCA_SOSTENIBLE
+    AGRICULTURA_ECOLOGICA
+    VISITAS_COMUNIDADES_INDIGENAS
+    TERAPIAS_NATURALEZA
+}
 
 type Product {
     id: ID
@@ -33,15 +68,13 @@ type Product {
     price: Float
 }
 
-
 type Calificacion {
     idCalificacion: ID
     titulo: String
     descripcion: String
     reputacion: Int
-    servicio: Servicio 
+    servicio: Servicio
 }
-
 
 interface Servicio {
     idServicio: ID
@@ -50,9 +83,8 @@ interface Servicio {
     estado: EstadoServicio
     foto: String
     fotosDescripcion: [String]
-    calificaciones: [Calificacion] 
+    calificaciones: [Calificacion]
 }
-
 
 type Transporte implements Servicio {
     idServicio: ID
@@ -61,7 +93,7 @@ type Transporte implements Servicio {
     estado: EstadoServicio
     foto: String
     fotosDescripcion: [String]
-    calificaciones: [Calificacion] # Relación heredada desde Servicio
+    calificaciones: [Calificacion]
     tipoTransporte: TipoTransporte
     fechaSalida: String
     fechaLlegada: String
@@ -73,4 +105,21 @@ type Transporte implements Servicio {
     destinoLongitud: Float
 }
 
-
+type Actividad implements Servicio {
+    idServicio: ID
+    nombre: String
+    descripcion: String
+    estado: EstadoServicio
+    foto: String
+    fotosDescripcion: [String]
+    calificaciones: [Calificacion]
+    tipoActividad: TipoActividad
+    duracion: Float
+    nivelDificultad: NivelDificultad
+    precio: Float
+    requerimientos: [String]
+    capacidadMaxima: Int
+    ubicacionLatitud: Float
+    ubicacionLongitud: Float
+    nombreUbicacion: String
+}
